@@ -5,26 +5,32 @@
     <title>Funkcja kwadratowa</title>
     <link rel="stylesheet" href="styl.css">
     <script src="jquery.js"></script>
-    <script src="script.js"></script>
+
 </head>
 <body>
     <header>
         <h1>Miejsca zerowe funkcji kwadratowej</h1>
     </header>
     <article>
-            <h2 class="title">y=ax<sup>2</sup>+bx+c</h2>
+        <div class="form">
+        <h2 class="title">y=ax<sup>2</sup>+bx+c</h2>
         <form action="">
            <label>Podaj A: <input type="number" id="numberA"></label><br>
            <label>Podaj B: <input type="number" id="numberB"></label><br>
            <label>Podaj C: <input type="number" id="numberC"></label><br>
             <input class="button" type="button" onclick="checkTheZero()" value="Sprawdź">
-            <input class="button" type="reset" value="Wyczyść">
+            <input class="button" type="button" onclick="clear()" value="Wyczyść">
         </form>
-        <div class="result"></div>
+        <div class="result displayNone"></div>
+        </div><div class="containerCanvas displayNonea">
+        <canvas id="MyCanvas" width="600" height="600"></canvas>
+    </div>
+
+
     </article>
 <footer>
     Strone wykonał: Błażej Szymański
 </footer>
-
+    <script src="script.js"></script>
 </body>
 </html>
