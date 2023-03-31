@@ -8,6 +8,8 @@ let bl = 1;
 let rangex = w/range;
 let rangey = h/range;
 let color = "green";
+ctx.translate(w/2, h/2);
+ctx.scale(range,range);
 
 function checkTheZero()
 {
@@ -22,9 +24,7 @@ function checkTheZero()
     			success: function(data){
 
     			console.log(data);
-   			    displayData(data)
-
-   			    ;
+   			    displayData(data);
                     	},
                 error: function(data){
                 $('.result').empty();
@@ -35,85 +35,78 @@ function checkTheZero()
 }
 function clearCanvas()
 {
-    ctx.beginPath();
-    ctx.clearRect(-50,-50, h, w);
-    ctx.stroke();
+    ctx.clearRect(-range,-range, w, h);
     $('.result').addClass('displayNone');
     drawGrid();
 }
 function drawGrid()
-{
-	ctx.strokeStyle = "black";
-	for(i=1;i<=Math.floor(rangex*2);i++)
+{   ctx.fillStyle = "black";
+    ctx.strokeStyle = "black";
+	for(i=-range;i<=range;i+=0.5)
 	{
-		ctx.lineWidth = 1/6;
+		ctx.lineWidth = 1/80;
 		ctx.beginPath();
-		ctx.moveTo((range/2)*i,0);
-		ctx.lineTo((range/2)*i,h);
+		ctx.moveTo(i,-range);
+		ctx.lineTo(i,range);
 		ctx.closePath();
 		ctx.stroke();
 	}
-	for(i=1;i<=Math.floor(rangey*2);i++)
+	for(i=-range;i<=range;i+=0.5)
 	{
-		ctx.lineWidth = 1/6;
+		ctx.lineWidth = 1/80;
 		ctx.beginPath();
-		ctx.moveTo(0,(range/2)*i);
-		ctx.lineTo(w,(range/2)*i);
+		ctx.moveTo(-range,i);
+		ctx.lineTo(range,i);
 		ctx.closePath();
 		ctx.stroke();
 	}
-	ctx.lineWidth = 1;
+	ctx.lineWidth = 1/15;
 	ctx.beginPath();
-	ctx.moveTo(0,h/2);
-	ctx.lineTo(w,h/2);
+	ctx.moveTo(-range,0);
+	ctx.lineTo(range,0);
 	ctx.closePath();
 	ctx.stroke();
 
 	ctx.beginPath();
-	ctx.moveTo(w/2,0);
-	ctx.lineTo(w/2,h);
+	ctx.moveTo(0,-range);
+	ctx.lineTo(0,range);
 	ctx.closePath();
 	ctx.stroke();
-	for(i=-(rangex/2);i<=(rangex/2);i++)
+	for(i=-range;i<=range;i+=1)
 	{
 	    if(i!=0){
-	        ctx.font = "20px Arial";
-		    ctx.fillText(i,(i+((rangex)/2))*range,(h-10)/2);
-		    ctx.lineWidth = 1;
+	        ctx.font = "0.5px Arial";
+		    ctx.fillText(i,(i+0.07),-0.10);
+		    ctx.lineWidth = 1/20;
             ctx.beginPath();
-        	ctx.moveTo((i+((rangex)/2))*range,(h-10)/2);
-        	ctx.lineTo((i+((rangex)/2))*range,(h+10)/2);
+        	ctx.moveTo(i,-0.12);
+        	ctx.lineTo(i,0.12);
         	ctx.closePath();
         	ctx.stroke();
         }
     }
-    for(i=-(rangey/2);i<=(rangey/2);i++)
+    for(i=range;i>=-range;i--)
 	{
 
-	        ctx.font = "20px Arial";
-		    ctx.fillText(-i,(w+10)/2,(i+((rangex-0.2)/2))*range);
+	        ctx.font = "0.5px Arial";
+		    ctx.fillText(-i,0.1,(i-0.1));
             if(i!=0){
-		    		ctx.lineWidth = 1;
+		    		ctx.lineWidth = 1/20;
                     ctx.beginPath();
-                    ctx.moveTo((w-10)/2,(i+((rangex)/2))*range);
-                    ctx.lineTo((w+10)/2,(i+((rangex)/2))*range);
+                    ctx.moveTo(-0.12,i);
+                    ctx.lineTo(0.12,i);
                     ctx.closePath();
                     ctx.stroke();
             }
     }
     ctx.save();
+
 }
+
 drawGrid();
-function start_settings()
-{
-	ctx.translate(w/2, h/2);
-	ctx.scale(range,range);
-}
-start_settings();
 
 function displayData(data)
  {
-    //drawGrid();
     $('.result').empty();
     $('.title').empty();
     $('.result').removeClass('displayNone');
